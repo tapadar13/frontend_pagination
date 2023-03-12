@@ -27,7 +27,12 @@ function App() {
   }, []);
 
   const selectPageHandler = (selectedPage) => {
-    setPage(selectedPage);
+    if (
+      selectedPage >= 1 &&
+      selectedPage < products.length / 5 &&
+      selectedPage !== page
+    )
+      setPage(selectedPage);
   };
 
   return (
@@ -46,7 +51,12 @@ function App() {
       )}
       {products.length > 0 && (
         <div className="pagination">
-          <span>◀️</span>
+          <span
+            onClick={() => selectPageHandler(page - 1)}
+            className={page > 1 ? "" : "pagination__disable-button"}
+          >
+            ◀️
+          </span>
           {[...Array(products.length / 6)].map((_, idx) => {
             return (
               <span
@@ -58,7 +68,14 @@ function App() {
               </span>
             );
           })}
-          <span>▶️</span>
+          <span
+            onClick={() => selectPageHandler(page + 1)}
+            className={
+              page < products.length / 6 ? "" : "pagination__disable-button"
+            }
+          >
+            ▶️
+          </span>
         </div>
       )}
     </div>
