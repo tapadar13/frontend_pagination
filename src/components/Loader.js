@@ -1,5 +1,7 @@
+import "../styles/loader.css";
+
 const Loader = () => {
-    return <h3>Loading...</h3>
-}
+  return <h1 className="loader">Loading...</h1>;
+};
 
 export default Loader;
